@@ -15,14 +15,16 @@ function setup() {
     }
   }
 //丸を置く
+//赤丸
 for(let j = 0; j<3; j++){
   for(let i=0; i<8; i++){
     if((i+j)%2===1){
     fill(220,0,0);
-    circle(size*i + size / 2,size*j + size / 2,size*0.9)//赤丸
+    circle(size*i + size / 2,size*j + size / 2,size*0.9)
   }
 }
 }
+//黒丸
 for(let j = 5; j<8; j++){
   for(let i = 0; i<8; i++){
     if((i+j)%2===1){
