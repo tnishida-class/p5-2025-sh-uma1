@@ -25,9 +25,23 @@ function draw(){
   rect(0, groundY, width, height - groundY);
 
   // BLANK[1] キャラクターの左右移動
+  if(keyIsDown(LEFT_ARROW)){vx -= 1; };
+  if(keyIsDown(RIGHT_ARROW)){vx += 1; };
+
+  // 左右キー＋Aでダッシュ
+　if(keyIsDown(LEFT_ARROW) && keyIsDown("A".charCodeAt(0))){vx -= 2; };
+  if(keyIsDown(RIGHT_ARROW) && keyIsDown("A".charCodeAt(0))){vx += 2; };
+
+  //摩擦
+  vx *= 0.8;
 
   // BLANK[2] 重力とジャンプ
+  vy +=g;
+  if(y >= groundY - size/2){
+    if(keyIsDown(" ".charCodeAt(0))){vy -= 20; }
+  }
 
+ 
   // 速くなりすぎないように制限
   vx = constrain(vx, -20, 20);
   vy = constrain(vy, -20, 20);
@@ -35,6 +49,14 @@ function draw(){
   // 位置を更新
   x += vx;
   y += vy;
+
+  // 左右反対側から戻る
+  if(x > width){ x = 0; }
+  else if(x < 0){ x = width; };
+
+  // 地面に埋まらないように
+  if(y > groundY - size/2){ y = groundY - size/2; };
+  
 
   // キャラクターを描く
   fill(0);
