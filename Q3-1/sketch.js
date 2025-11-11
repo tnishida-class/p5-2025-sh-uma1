@@ -7,14 +7,26 @@ function setup(){
   count = 0;
 }
 
-function draw(){
-  background(160, 192, 255);
+let speed = 1; // アニメーションの速さ(speedは1)
+function draw(){ //繰り返し処理
+  background(160, 192, 255); //背景(水色)
   
-  let speed = 1; // アニメーションの速さ
-  // BLANK[2]
-  count = (count + speed) % cycle;
+  if (keyIsPressed) { 
+    speed =2;
+  } else{
+    speed=1
+  }//キーを押しているとspeedが２に
+  
 
-  let size = 50;
-  // BLANK[1] 1周期の前半は size が大きくなり、後半は小さくなる
-  ellipse(width / 2, height / 2, size);
+  count = (count + speed) % cycle; //周期(100)を超えたら０に戻す
+ 
+
+  let size = 50; //最初の大きさ
+ 
+  if(count < cycle / 2){
+    size = 50 + count; //1周期の前半は size が大きく
+  }else{
+    size = 50 + cycle - count
+  } //後半は size が小さく
+  ellipse(width / 2, height / 2, size); //円
 }
