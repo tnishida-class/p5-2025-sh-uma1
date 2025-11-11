@@ -21,24 +21,24 @@ function draw(){
 
   // 地面を描く
   const groundY = height * 0.8;
-  fill(64, 192, 64);
+  fill(64, 192, 64); //色
   rect(0, groundY, width, height - groundY);
 
-  // BLANK[1] キャラクターの左右移動
-  if(keyIsDown(LEFT_ARROW)){vx -= 1; };
-  if(keyIsDown(RIGHT_ARROW)){vx += 1; };
+  // BLANK[1] キャラクターの左右移動(速度１)
+  if(keyIsDown(LEFT_ARROW)){vx -= 1; }; //←で左に
+  if(keyIsDown(RIGHT_ARROW)){vx += 1; }; //→で右に
 
-  // 左右キー＋Aでダッシュ
+  // 左右キー＋Aでダッシュ(速度２)
 　if(keyIsDown(LEFT_ARROW) && keyIsDown("A".charCodeAt(0))){vx -= 2; };
   if(keyIsDown(RIGHT_ARROW) && keyIsDown("A".charCodeAt(0))){vx += 2; };
 
-  //摩擦
+  //地面との摩擦
   vx *= 0.8;
 
-  // BLANK[2] 重力とジャンプ
-  vy +=g;
-  if(y >= groundY - size/2){
-    if(keyIsDown(" ".charCodeAt(0))){vy -= 20; }
+  //重力とジャンプ
+  vy +=g; //重力 
+  if(y >= groundY - size/2){ //空中ジャンプができないように(キャラが地面にいる時)
+    if(keyIsDown(" ".charCodeAt(0))){vy -= 20; } //スペースでジャンプ
   }
 
  
@@ -50,11 +50,11 @@ function draw(){
   x += vx;
   y += vy;
 
-  // 左右反対側から戻る
+  // 画面外に出たら反対側から戻る
   if(x > width){ x = 0; }
   else if(x < 0){ x = width; };
 
-  // 地面に埋まらないように
+  // キャラが地面に埋まらないように
   if(y > groundY - size/2){ y = groundY - size/2; };
   
 
